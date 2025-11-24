@@ -27,6 +27,15 @@ export async function getInitialState(): Promise<{
   loading?: boolean;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
+  // Apply persisted user theme preference (if any)
+  if (typeof window !== 'undefined') {
+    const storedTheme = window.localStorage.getItem('user-theme-mode');
+    if (storedTheme === 'dark') {
+      defaultSettings.navTheme = 'realDark';
+    } else if (storedTheme === 'light') {
+      defaultSettings.navTheme = 'light';
+    }
+  }
   const fetchUserInfo = async () => {
     try {
       const msg = await queryCurrentUser({

@@ -5,9 +5,10 @@ import BaseView from './components/base';
 import BindingView from './components/binding';
 import NotificationView from './components/notification';
 import SecurityView from './components/security';
+import ThemeView from './components/theme';
 import useStyles from './style.style';
 
-type SettingsStateKeys = 'base' | 'security' | 'binding' | 'notification';
+type SettingsStateKeys = 'base' | 'security' | 'binding' | 'notification' | 'theme';
 type SettingsState = {
   mode: 'inline' | 'horizontal';
   selectKey: SettingsStateKeys;
@@ -19,6 +20,7 @@ const Settings: React.FC = () => {
     security: 'Security settings',
     binding: 'Account binding',
     notification: 'New message notification',
+    theme: 'Appearance',
   };
   const [initConfig, setInitConfig] = useState<SettingsState>({
     mode: 'inline',
@@ -70,6 +72,8 @@ const Settings: React.FC = () => {
         return <BindingView />;
       case 'notification':
         return <NotificationView />;
+      case 'theme':
+        return <ThemeView />;
       default:
         return null;
     }
