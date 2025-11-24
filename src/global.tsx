@@ -5,6 +5,14 @@ import defaultSettings from '../config/defaultSettings';
 const { pwa } = defaultSettings;
 const isHttps = document.location.protocol === 'https:';
 
+// Force app locale to English for all built-in dev panels (e.g. theme setting drawer)
+if (typeof window !== 'undefined') {
+  const currentLocale = window.localStorage.getItem('umi_locale');
+  if (currentLocale !== 'en-US') {
+    window.localStorage.setItem('umi_locale', 'en-US');
+  }
+}
+
 const clearCache = () => {
   // remove all caches
   if (window.caches) {
